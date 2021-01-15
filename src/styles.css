@@ -1,3 +1,6 @@
+
+
+
 .main-container{
     margin-top: 40px;
     margin-bottom: 150px;
@@ -11,17 +14,31 @@
   .chat-window{
     padding: 10px;
     width: 300px;
-    height: 400px;
+    height: 425px;
     overflow: hidden;
     border: 1px solid #4080FF;
     border-radius: 20px;
+  }
+
+  .app-mensajes::-webkit-scrollbar {
+    width: 6px;               /* width of the entire scrollbar */
+  }
+
+  .app-mensajes::-webkit-scrollbar-track {
+    background: transparent;        /* color of the tracking area */
+  }
+
+  .app-mensajes::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.5);    /* color of the scroll thumb */
+    border-radius: 10px;      /* roundness of the scroll thumb */
   }
 
   .app-mensajes{
     overflow-y:scroll;
     height:270px;
     /*background:gray;*/
-    padding: 5px;
+    padding: 5px 10px 10px 5px;
+    margin-bottom: 10px;
   }
 
 

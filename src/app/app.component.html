@@ -1,10 +1,14 @@
-<div class="container mt-5">
+<div class="container main-container">
   <h1>FireChat</h1>
   <hr>
 
-  <ul>
+  <div class="chat-window">
+    <app-chat></app-chat>
+  </div>
+
+  <!-- <ul>
     <li class="text" *ngFor="let chat of chats | async">
       {{chat.msg}}
     </li>
-  </ul>
+  </ul> -->
 </div>
