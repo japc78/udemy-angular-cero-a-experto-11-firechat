@@ -10,6 +10,7 @@ import { AngularFireAnalyticsModule } from '@angular/fire/analytics';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { ChatComponent } from './components/chat/chat.component';
 import { FormsModule } from '@angular/forms';
+import { ChatService } from './providers/chat.service';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,9 @@ import { FormsModule } from '@angular/forms';
     AngularFirestoreModule,
     FormsModule
   ],
-  providers: [],
+  providers: [
+    ChatService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
