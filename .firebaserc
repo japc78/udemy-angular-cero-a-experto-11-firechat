@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "udemy-angular-firechat-59051": {
+      "hosting": {
+        "firechat": [
+          "udemy-angular-firechat-59051"
+        ]
+      }
+    }
+  }
+}
