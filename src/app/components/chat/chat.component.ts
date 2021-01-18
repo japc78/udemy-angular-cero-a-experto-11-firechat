@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ChatService } from '../../providers/chat.service';
+import { Message } from '../../interface/message.interface';
 
 @Component({
   selector: 'app-chat',
@@ -7,21 +8,26 @@ import { ChatService } from '../../providers/chat.service';
   styles: [
   ]
 })
-export class ChatComponent implements OnInit {
+export class ChatComponent {
 
   message = '';
 
-  constructor( private chatService: ChatService) {
-    this.chatService.loadingMessages()
-      .subscribe((messages: any[]) => {
-        console.log(messages);
-      });
-   }
-
-  ngOnInit(): void {
+  constructor( public chatService: ChatService) {
+    this.chatService.loadingMessages().subscribe();
   }
 
-  sendMessage() {
+  sendMessage(): void {
+
+    if( this.message.length === 0 ) {
+      return;
+    }
+
+    this.chatService.addMessage(this.message)
+      .then(() => {
+        console.log('Message saved');
+        this.message = '';
+      })
+      .catch((err) => console.log(`Error to send: ${err}`));
     console.log(this.message);
   }
 }
