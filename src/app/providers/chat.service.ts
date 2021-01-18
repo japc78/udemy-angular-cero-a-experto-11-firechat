@@ -14,7 +14,7 @@ export class ChatService {
 
   private itemsCollection: AngularFirestoreCollection<Message>;
   public chats: Message[] = [];
-  public userLogin: any = {};
+  public userApp: any = {};
 
   constructor(
     private afs: AngularFirestore,
@@ -26,9 +26,11 @@ export class ChatService {
           return;
         }
 
-        this.userLogin.name = user.displayName;
-        this.userLogin.uid = user.uid;
-      })
+        this.userApp.name = user.displayName;
+        this.userApp.uid = user.uid;
+        console.log(this.userApp);
+
+      });
     }
 
 
@@ -37,6 +39,7 @@ export class ChatService {
   }
 
   logout() {
+    this.userApp = {};
     this.auth.signOut();
   }
 
