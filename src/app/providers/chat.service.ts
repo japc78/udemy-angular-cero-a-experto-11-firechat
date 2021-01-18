@@ -34,11 +34,13 @@ export class ChatService {
     }
 
 
-  login(provider: string) {
-    this.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+  login(provider: string): void {
+    if (provider === 'google') {
+      this.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+    }
   }
 
-  logout() {
+  logout(): void {
     this.userApp = {};
     this.auth.signOut();
   }
@@ -63,9 +65,10 @@ export class ChatService {
 
   addMessage( txt: string): Promise<any> {
     let msg: Message = {
-      name: 'Demo',
+      name: this.userApp.name,
       msg: txt,
-      date: new Date().getTime()
+      date: new Date().getTime(),
+      uid: this.userApp.uid
     };
 
     // Es una promesa, por lo tanto then y cath. Que es posible llamarlas desde aquí
