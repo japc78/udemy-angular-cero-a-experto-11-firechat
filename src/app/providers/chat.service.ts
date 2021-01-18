@@ -3,6 +3,7 @@ import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/fire
 import { Observable } from 'rxjs';
 import { Message } from '../interface/message.interface';
 import { map } from 'rxjs/operators';
+import { MessagePlaceholder } from '@angular/compiler/src/i18n/i18n_ast';
 
 @Injectable({
   providedIn: 'root'
@@ -16,19 +17,24 @@ export class ChatService {
   }
 
   loadingMessages(): Observable<Message[]> {
-    this.itemsCollection = this.afs.collection<Message>('chats');
-    // return this.itemsCollection.valueChanges();
+    // ref es un segundo parametro para mandar querys sobre firebase
+    this.itemsCollection = this.afs.collection<Message>('chats',
+      // Consulta
+      ref => ref.orderBy('date', 'desc').limit(5));
+
     return this.itemsCollection.valueChanges().pipe(
         map ( (messages: Message[]) => {
-          this.chats = messages;
-          // console.log(this.chats);
+          // Para que se muestren los últimos mensajes primero.
+          this.chats = [];
+          messages.forEach(chat => {
+            this.chats.unshift(chat);
+          });
           return this.chats;
         })
       );
   }
 
-  addMessage( txt: string) {
-
+  addMessage( txt: string): Promise<any> {
     let msg: Message = {
       name: 'Demo',
       msg: txt,
